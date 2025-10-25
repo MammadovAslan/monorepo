@@ -5,6 +5,9 @@
   "references": [
     {
       "path": "./apps/sso"
+    },
+    {
+      "path": "./apps/mobile"
     }
   ]
 }
