@@ -1,82 +1,198 @@
-# Org
+# Monorepo Learning Project
 
 <a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+A learning project to practice **monorepo architecture** using [Nx](https://nx.dev), featuring two applications that share code and tooling.
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/next?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+## 🎯 Project Overview
 
-## Finish your CI setup
+This repository demonstrates a monorepo setup with:
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/h6lIuTYQDX)
+- **Next.js App** (`sso`) - Server-side rendered web application
+- **React Native App** (`mobile`) - Cross-platform mobile application (iOS/Android/Web)
+- **Shared tooling** - ESLint, TypeScript, Jest, and CI/CD configuration
+- **Code sharing** - Ability to create shared libraries used by both apps
 
+## 🚀 Getting Started
 
-## Run tasks
+### Prerequisites
 
-To run the dev server for your app, use:
+- Node.js 20+ and npm
+- For React Native development:
+  - **Android**: Android Studio and Android SDK
+  - **iOS**: Xcode (macOS only)
 
-```sh
+### Installation
+
+```bash
+npm install
+```
+
+## 📱 Running the Applications
+
+### Next.js App (SSO)
+
+```bash
+# Development server
 npx nx dev sso
-```
 
-To create a production bundle:
-
-```sh
+# Production build
 npx nx build sso
+
+# Start production server
+npx nx start sso
 ```
 
-To see all available targets to run for a project, run:
+Open [http://localhost:4200](http://localhost:4200) in your browser.
 
-```sh
+### React Native App (Mobile)
+
+```bash
+# Run as web app (fastest for development)
+npx nx dev mobile
+# Open http://localhost:4200
+
+# Start Metro bundler
+npx nx start mobile
+
+# Run on Android
+npx nx run-android mobile
+
+# Run on iOS (macOS only)
+npx nx run-ios mobile
+
+# Build for Android
+npx nx build-android mobile
+
+# Build for iOS
+npx nx build-ios mobile
+```
+
+## 🛠️ Development Commands
+
+### Running Tasks
+
+```bash
+# Run tests for all projects
+npx nx run-many -t test
+
+# Lint all projects
+npx nx run-many -t lint
+
+# Build all projects
+npx nx run-many -t build
+
+# Type-check all projects
+npx nx run-many -t typecheck
+```
+
+### Project Information
+
+```bash
+# See all available commands for a project
 npx nx show project sso
+npx nx show project mobile
+
+# Visualize project dependencies
+npx nx graph
+
+# List all projects
+npx nx show projects
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+## 📦 Adding Shared Libraries
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Create shared libraries that both apps can use:
 
-## Add new projects
+```bash
+# Create a shared utilities library
+npx nx g @nx/js:lib shared-utils
 
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
+# Create a shared React component library
+npx nx g @nx/react:lib shared-ui
 
-Use the plugin's generator to create new projects.
-
-To generate a new application, use:
-
-```sh
-npx nx g @nx/next:app demo
+# Create a shared React Native component library
+npx nx g @nx/react-native:lib mobile-ui
 ```
 
-To generate a new library, use:
+Then import from these libraries:
 
-```sh
-npx nx g @nx/react:lib mylib
+```typescript
+// In both apps
+import { someUtil } from '@org/shared-utils';
+import { Button } from '@org/shared-ui';
 ```
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+## 🏗️ Project Structure
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+```
+org/
+├── apps/
+│   ├── sso/              # Next.js application
+│   └── mobile/           # React Native application
+├── libs/                 # Shared libraries (create as needed)
+├── .github/
+│   └── workflows/
+│       └── ci.yml        # CI/CD pipeline
+├── nx.json               # Nx configuration
+├── package.json          # Dependencies
+└── tsconfig.base.json    # Shared TypeScript config
+```
 
+## 🔧 Tech Stack
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- **Build System**: [Nx](https://nx.dev)
+- **Web Framework**: [Next.js 15](https://nextjs.org)
+- **Mobile Framework**: [React Native 0.79](https://reactnative.dev)
+- **UI Library**: [React 19](https://react.dev)
+- **Language**: [TypeScript](https://www.typescriptlang.org)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com)
+- **Testing**: [Jest](https://jestjs.io)
+- **Linting**: [ESLint](https://eslint.org)
+- **CI/CD**: GitHub Actions
 
-## Install Nx Console
+## 📚 Learning Resources
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+### Nx Documentation
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- [Nx Overview](https://nx.dev/getting-started/intro)
+- [Module Boundaries](https://nx.dev/features/enforce-module-boundaries)
+- [Task Pipeline](https://nx.dev/concepts/task-pipeline-configuration)
 
-## Useful links
+### Next.js
 
-Learn more:
+- [Next.js Documentation](https://nextjs.org/docs)
+- [App Router Guide](https://nextjs.org/docs/app)
 
-- [Learn more about this workspace setup](https://nx.dev/nx-api/next?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+### React Native
 
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- [React Native Docs](https://reactnative.dev/docs/getting-started)
+- [Nx React Native Plugin](https://nx.dev/nx-api/react-native)
+
+## 🎓 Learning Goals
+
+This project helps practice:
+
+- ✅ Monorepo architecture and tooling
+- ✅ Code sharing between web and mobile
+- ✅ Build system optimization with Nx
+- ✅ CI/CD pipeline configuration
+- ✅ Cross-platform development
+- ✅ TypeScript in a large codebase
+- ✅ Dependency management in workspaces
+
+## 🤝 Contributing
+
+This is a personal learning project, but feel free to:
+
+- Open issues for questions or discussions
+- Submit PRs with improvements or fixes
+- Fork it for your own learning!
+
+## 📄 License
+
+MIT
+
+---
+
+**Happy Learning!** 🚀
