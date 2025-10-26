@@ -77,5 +77,8 @@
   },
   "workspaces": [
     "apps/*"
-  ]
+  ],
+  "overrides": {
+    "chokidar": "^3.6.0"
+  }
 }
