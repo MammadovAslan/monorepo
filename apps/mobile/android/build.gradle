@@ -18,4 +18,8 @@ buildscript {
     }
 }
 
+ext {
+    reactNativeRoot = file("../../node_modules/react-native")
+}
+
 apply plugin: "com.facebook.react.rootproject"

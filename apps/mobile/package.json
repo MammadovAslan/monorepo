@@ -1,5 +1,15 @@
 {
   "name": "@org/mobile",
   "version": "0.0.1",
-  "private": true
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start"
+  },
+  "dependencies": {
+    "react": "*",
+    "react-native": "*",
+    "react-native-svg": "^15.14.0"
+  }
 }

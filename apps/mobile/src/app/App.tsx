@@ -14,7 +14,6 @@ import Svg, { G, Path } from 'react-native-svg';
 export const App = () => {
   const [whatsNextYCoord, setWhatsNextYCoord] = useState<number>(0);
   const scrollViewRef = useRef<null | ScrollView>(null);
-
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -37,7 +36,7 @@ export const App = () => {
               testID="heading"
               role="heading"
             >
-              Welcome Mobile Middle Padavan👋
+              HELLO TINA
             </Text>
           </View>
           <View style={styles.section}>
