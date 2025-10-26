@@ -47,22 +47,63 @@ Open [http://localhost:4200](http://localhost:4200) in your browser.
 
 ### React Native App (Mobile)
 
+#### Web Development (Fastest)
+
 ```bash
 # Run as web app (fastest for development)
 npx nx dev mobile
 # Open http://localhost:4200
+```
 
-# Start Metro bundler
-npx nx start mobile
+#### Android Development (Local)
 
-# Run on Android
-npx nx run-android mobile
+**Prerequisites:**
 
-# Run on iOS (macOS only)
+- Android Studio installed with Android SDK
+- Android emulator configured or physical device connected
+
+**Steps:**
+
+1. **Start Metro bundler** (in one terminal):
+
+```bash
+cd apps/mobile
+npx metro start
+```
+
+2. **Run the app** (in another terminal):
+
+```bash
+cd apps/mobile
+npx react-native run-android
+```
+
+**Alternative: Using Android Studio**
+
+1. Start Metro bundler:
+
+```bash
+cd apps/mobile
+npx metro start
+```
+
+2. Open `apps/mobile/android` folder in Android Studio
+
+3. Wait for Gradle sync to complete
+
+4. Click the green **Run** button to launch the app on emulator/device
+
+5. If you get "Unable to load script" error, run:
+
+```bash
+adb reverse tcp:8081 tcp:8081
+```
+
+#### iOS Development (macOS only)
+
+```bash
+# Run on iOS simulator
 npx nx run-ios mobile
-
-# Build for Android
-npx nx build-android mobile
 
 # Build for iOS
 npx nx build-ios mobile
